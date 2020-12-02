@@ -1,2 +1,3 @@
 # Hello-world
-Just another repository
+this is is my first repository  
+i love sport and programming a and learning language
