@@ -18,3 +18,27 @@ def help(message: telebot.types.Message):
 @bot.message_handler(commads=['values'])
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
+        for key in keys.keys()
+        text = '\n'.join((text, key,))
+    bot.reply_to(message, text)
+
+
+@bot.message_handler(content_types=['text', ])
+def convert(message: telebot.types.Message):
+    try:
+        values = massage.text.split(' ')
+
+        if len(values) != 3:
+           raise ConvertionException('Слишком много параметров.')
+
+        quotes, base, amount = values
+        total_base = CryptoConverter.convert(quote, base, amout)
+    except ConverterException as e:
+     except Exception as e:
+        bot.send_massage(massage, f'Не удалось обработатькоманду\n{e}')
+    else:
+
+         text = f'Цена{amount} {quote} в {base} - {total_base}'
+         bot.send_massage(message.chat.id, text)
+
+ bot.polling()
