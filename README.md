@@ -2,7 +2,7 @@
 
 import telebot
 from config import keys, TOKEN
-from bot2 import ConvertionException, Cryptoconverter
+from utils import ConvertionException, Cryptoconverter
 
 bot = telebot.Telebot(TOKEN)
 
@@ -25,20 +25,19 @@ def values(message: telebot.types.Message):
 
 @bot.message_handler(content_types=['text', ])
 def convert(message: telebot.types.Message):
+    values = massage.text.split(' ')
+    values = list(map(str.lower, value))
     try:
-        values = massage.text.split(' ')
-
-        if len(values) != 3:
-           raise ConvertionException('Слишком много параметров.')
-
-        quotes, base, amount = values
-        total_base = CryptoConverter.convert(quote, base, amout)
+       if len(values) != 3:
+          raise ConvertionException('Слишком много параметров.')
+       quotes, base, amount = values
+       total_base = CryptoConverter.convert(quote, base, amount)
     except ConverterException as e:
-     except Exception as e:
-        bot.send_massage(massage, f'Не удалось обработатькоманду\n{e}')
+       bot.reply_to(massage, f'Не удалось обработать команду\n{e}')
+    except Exception as e:
+       bot.reply_to(massage, f'Не удалось обработатькоманду\n{e}')
     else:
+       text = f'Цена{amount} {quote} в {base} -- {total_base}'
+       bot.reply_to(message.chat.id, text)
 
-         text = f'Цена{amount} {quote} в {base} - {total_base}'
-         bot.send_massage(message.chat.id, text)
-
- bot.polling()
+ bot.polling(non_stop=True, interval=0)
