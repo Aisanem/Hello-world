@@ -1,0 +1,6 @@
+TOKEN = 1364125548:AAG3A-u0ygQgYF1vhl0_ZnZH5vTlklqc6Ek
+keys = {
+    'биткоин': 'BTC',
+    'эфириум': 'ETH',
+    'доллар': 'USD',
+}
